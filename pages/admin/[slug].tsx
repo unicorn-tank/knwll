@@ -4,7 +4,6 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
 import { useForm } from 'react-hook-form';
-import ReactMarkdown from 'react-markdown';
 
 import AuthCheck from '../../components/AuthCheck';
 
@@ -68,7 +67,7 @@ function QuestionForm({ questionRef, defaultValues, preview }) {
 
             {preview && (
                 <div className="card">
-                    <ReactMarkdown>{watch('answer')}</ReactMarkdown>
+                    {/* <ReactMarkdown>{watch('answer')}</ReactMarkdown> */}
                 </div>
             )}
 

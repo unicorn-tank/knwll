@@ -52,14 +52,14 @@ export default function Home(props) {
       setQuestionsEnd(true);
     }
   }
-
+ 
 
   return (
     <main>
-      <Metatags title="Qiuzzo CC: Home Page" description="Get the latest questions" />
+      <Metatags title="Qiuzzo CC: Questions & Answers, Clevers CLub" description="Get the latest questions" />
 
       <div className="card card-info">
-          <p>Quizzo CC - Questions & Answers</p>
+          <p>Questions & Answers</p>
       </div>
 
       <QuestionFeed questions={questions} admin={false} />

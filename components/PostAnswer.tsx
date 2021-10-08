@@ -1,5 +1,4 @@
 import Link from 'next/Link';
-import ReactMarkdown from 'react-markdown';
 import { postToJSON } from '../lib/firebase';
 import PostQuestionPage from '../pages/[username]/[slug]';
 
@@ -21,7 +20,7 @@ export default function PostAnswer({ question }) {
 
             </span>
             <h2>Answer:</h2>
-             <ReactMarkdown>{question?.answer}</ReactMarkdown>
+             <h2>{question?.answer}</h2>
 
         </div>
     )
