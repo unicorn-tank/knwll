@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+import Link from 'next/link';
 import { auth, googleAuthProvider, firestore } from '../lib/firebase';
 import { useState, useContext, useEffect, useCallback } from 'react';
 import { UserContext } from '../lib/context';

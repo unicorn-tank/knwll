@@ -1,5 +1,5 @@
 import { Router } from 'next/dist/client/router';
-import Link from 'next/Link';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 import { UserContext } from '../lib/context';

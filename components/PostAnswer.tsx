@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+import Link from 'next/link';
 import { postToJSON } from '../lib/firebase';
 import PostQuestionPage from '../pages/[username]/[slug]';
 
