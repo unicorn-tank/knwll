@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { auth, googleAuthProvider, firestore } from '../lib/firebase';
 import { useState, useContext, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import { UserContext } from '../lib/context';
 import { ToastBar } from 'react-hot-toast';
 import debounce from 'lodash.debounce';
@@ -8,10 +9,18 @@ import debounce from 'lodash.debounce';
 export default function EnterPage(props) {
 
     const { user, username } = useContext(UserContext);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (username) {
+            router.push('/admin'); 
+        }
+        
+    }, [username])
 
     return (
         <main>
-            { user ? !username ? <UsernameForm /> : <SignOutButton /> : <SignInButton /> }
+            { user ? (!username ? <UsernameForm /> : <></>) : <SignInButton /> }
         </main>
     )
 }
@@ -22,13 +31,17 @@ function SignInButton() {
         await auth.signInWithPopup(googleAuthProvider);
     }
 
+    const signInAnonymously = async() => {
+        await auth.signInAnonymously();
+    }
+
     return (
         <>
             <button className="btn-google" onClick={signInWithGoogle}>
                 <img src={'/google.png'} width="30px" /> Sign in with Google
             </button>
 
-            <button onClick={() => auth.signInAnonymously()}>
+            <button onClick={signInAnonymously}>
                 Sign in Anonymously
             </button>
         </>
@@ -102,8 +115,11 @@ function UsernameForm() {
             <section>
                 <h3>Choose Username</h3>
                 <form onSubmit={onSubmit}>
+                    
                     <input name="username" placeholder="username" value={formValue} onChange={onChange} />
+                    
                     <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
+                    
                     <button type="submit" className="btn-green" disabled={!isValid}>
                         Choose
                     </button>

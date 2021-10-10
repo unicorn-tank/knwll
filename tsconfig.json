@@ -25,5 +25,10 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "paths": {
+    "@components/*": ["components/*"],
+    "@styles/*": ["styles/*"],
+    "@lib/*": ["lib/*"],
+  }
 }

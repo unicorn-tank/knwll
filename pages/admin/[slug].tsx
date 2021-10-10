@@ -44,13 +44,12 @@ function QuestionManager() {
 }
 
 function QuestionForm({ questionRef, defaultValues, preview }) {
-    const { register, handleSubmit, reset, watch, formState, formState: {errors} } = useForm({ defaultValues, mode: 'onChange'})
-
+    const { register, handleSubmit, reset, watch, formState, formState: {errors} } = useForm({ defaultValues, mode: 'onChange'});
     const { isValid, isDirty } = formState;
+    const router = useRouter();
 
     const updateQuestion = async ({ answer, published }) => {
 
-        console.log("ANswer:", answer);
         await questionRef.update({
             answer,
             published,
@@ -58,7 +57,7 @@ function QuestionForm({ questionRef, defaultValues, preview }) {
         });
 
         reset({ answer, published });
-
+        router.push(`/admin`);
         toast.success('Answer updated successfully!');
     }
 
@@ -76,7 +75,7 @@ function QuestionForm({ questionRef, defaultValues, preview }) {
                 <input name="answer" {...register("answer",
                                {required: true,
                                 maxLength: 150,
-                                minLength: 10}
+                                minLength: 3}
 
                         )}></input>
  

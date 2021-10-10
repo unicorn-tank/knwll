@@ -5,8 +5,6 @@ import { UserContext } from '../lib/context';
 
 import { useUserData } from '../lib/hooks';
 
-import { GetServerSideProps } from 'next'
-
 function MyApp({ Component, pageProps }) {
 
   const userData = useUserData();

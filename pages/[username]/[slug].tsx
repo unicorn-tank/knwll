@@ -58,7 +58,7 @@ export default function PostQuestion(props) {
 
             <aside className="card">
                 <p>
-                    <strong>{question.heartCount || 0}</strong>
+                    <strong>💛 {question.heartCount || 0}</strong>
                 </p>
             </aside>
 

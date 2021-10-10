@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function QuestionFeed({ questions, admin }) {
     return questions ? questions.map((question) => 
         <QuestionItem question={question} admin={admin} key={question.slug} />
-    ) : <>Nothing</>;
+    ) : <>Wait...</>;
 }
 
 function QuestionItem({ question, admin }) {
@@ -28,7 +28,7 @@ function QuestionItem({ question, admin }) {
             </Link>
 
             <footer>
-                <span>{question.heartCount} Hearts</span>
+                <span>💛 {question.heartCount}</span>
             </footer>
 
         </div>

@@ -56,7 +56,7 @@ export default function Home(props) {
 
   return (
     <main>
-      <Metatags title="Qiuzzo CC: Questions & Answers, Clevers CLub" description="Get the latest questions" />
+      <Metatags title="KNWL: Know All | Questions & Answers" description="Questions & Answers, know them almost all." />
 
       <div className="card card-info">
           <p>Questions & Answers</p>
