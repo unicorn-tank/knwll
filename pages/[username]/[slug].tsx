@@ -5,7 +5,7 @@ import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 export async function getStaticProps({ params }) {
-    const { username ,slug } = params;
+    const { username, slug } = params;
     const userDoc = await getUserWithUsername(username);
 
     let question;
@@ -38,7 +38,7 @@ export async function getStaticPaths() {
 
     return {
         paths,
-        fallback: 'blocking'
+        fallback: 'blocking',
     }
 }
 
