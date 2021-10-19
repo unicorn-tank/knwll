@@ -65,18 +65,21 @@ export default function Home(props) {
   }
 
   useEffect(() => {
-    fetchQuestionsCount();
+    fetchQuestionsCount(); 
   }, []);
-
-
  
 
   return (
     <main>
       <Metatags title="KNWL: Know All | Questions & Answers" description="Questions & Answers, know them almost all." />
 
-      <div className="card card-info">
-          <p>Questions & Answers (Total: {questionsCount})</p>
+      <div className="card card-head">
+        <div className="card-title">
+          <h1>Questions & Answers</h1>
+        </div>
+        <div className="card-info">
+          <h1>Total: {questionsCount}</h1>
+        </div>
       </div>
 
       <QuestionFeed questions={questions} admin={false} />

@@ -10,8 +10,9 @@ export default function PostAnswer({ question }) {
 
             <h1>{question?.question}</h1>
 
-            <span className="text-sm">
+            <h2><span className="answer-title">Answer:&nbsp;</span>{question?.answer}</h2>
 
+            <span className="text-sm author">
                 Written by{' '}
                 <Link href={`/${question.username}/`}>
                     <a className="text-info">@{question.username}</a>
@@ -19,8 +20,7 @@ export default function PostAnswer({ question }) {
                 on {createdAt.toISOString()}
 
             </span>
-            <h2>Answer:</h2>
-             <h2>{question?.answer}</h2>
+  
 
         </div>
     )
