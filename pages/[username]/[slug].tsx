@@ -1,8 +1,12 @@
+import Link from 'next/link';
 import styles from '../../styles/Question.module.css';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
+
 import PostQuestions from '../../components/QuestionFeed';
 import PostAnswer from '../../components/PostAnswer';
-import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
-import { useDocumentData } from 'react-firebase-hooks/firestore';
+import AuthCheck from '../../components/AuthCheck';
+import HeartButton from '../../components/HeartButton';
 
 export async function getStaticProps({ params }) {
     const { username, slug } = params;
@@ -57,10 +61,19 @@ export default function PostQuestion(props) {
             </section>
 
             <aside className="card">
-                <p>
-                    <strong>💛 {question.heartCount || 0}</strong>
-                </p>
+                <p><strong>💛 {question.heartCount || 0}</strong></p>
+
+                <AuthCheck fallback={
+                        <Link href="/enter">
+                            <button>🧡 Sign Up</button>
+                        </Link>
+                    }>
+                    <HeartButton questionRef={questionRef} />
+                </AuthCheck>
+
             </aside>
+
+
 
         </main>
     )

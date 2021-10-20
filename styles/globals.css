@@ -16,6 +16,7 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   margin-top: 50px;
+  font-family: Verdana, sans-serif;
 }
 
 
@@ -94,6 +95,12 @@ code {
 .navbar li {
   border-radius: 50%;
   
+}
+
+.brand-strap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 /* Buttons */
@@ -196,9 +203,13 @@ button.btn-logo {
 }
 .card-title {
   flex: auto;
+
 }
 .card-info {
   width: 10rem;
+}
+.card > h1 {
+  margin-bottom: 0;
 }
 
 /* Loader */
@@ -240,10 +251,6 @@ input[type="file"] {
   margin: 0;
   padding: 0;
   font-size: 0.85rem;
-}
-
-.card > h1 {
-  margin-bottom: 0;
 }
 
 .answer-title {

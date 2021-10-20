@@ -23,6 +23,7 @@ export const firestore = firebase.firestore();
 export const fromMillis = firebase.firestore.Timestamp.fromMillis;
 //export const toMillis = firebase.firestore.Timestamp.toMillis;
 export const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
+export const increment = firebase.firestore.FieldValue.increment;
 
 
 export const storage = firebase.storage();

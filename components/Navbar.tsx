@@ -20,7 +20,7 @@ export default function Navbar() {
             <ul>
                 <li>
                     <Link href="/">
-                        <button className="btn-logo">KNWLL</button>
+                        <div className="brand-strap"><button className="btn-logo">KNWLL</button><span>Know all, know well.</span></div>
                     </Link>
                 </li>
                 {
