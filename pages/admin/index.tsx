@@ -8,7 +8,6 @@ import QuestionFeed from '../../components/QuestionFeed';
 //import QuestionsList from './questions/questionslist';
 import CreateNewQuestion from './questions/createnewquestion';
 
-
 import Metatags from '../../components/Metatags';
 
 export default function AdminPostsPage(props) {

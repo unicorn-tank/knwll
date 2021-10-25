@@ -55,13 +55,11 @@ export default function Home(props) {
     }
   }
 
-  const fetchQuestionsCount = () =>{
-    const statRef = firestore.collection("stat").doc("questionsdata");
-    statRef.get().then(doc => {
-      if (doc.exists) {
-        setQuestionsCount(doc.data().count);
+  const fetchQuestionsCount = () => {
+    const questionsGroup = firestore.collectionGroup('questions').get().then((docs) => {
+      setQuestionsCount(docs.size);
       }
-    })
+    )
   }
 
   useEffect(() => {
@@ -71,7 +69,7 @@ export default function Home(props) {
 
   return (
     <main>
-      <Metatags title="KNWL: Know All | Questions & Answers" description="Questions & Answers, know them almost all." />
+      <Metatags title="KNWL: Know All | Questions & Answers | Smart Query, Quiz Request" description="Ask, query or inquire Questions & Answers pair like quiz request." />
 
       <div className="card card-head">
         <div className="card-title">

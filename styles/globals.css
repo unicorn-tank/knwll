@@ -206,11 +206,11 @@ button.btn-logo {
 
 }
 .card-info {
-  width: 10rem;
+  width: 20rem;
+  align-content: right;
+  text-align: right;
 }
-.card > h1 {
-  margin-bottom: 0;
-}
+
 
 /* Loader */
 

@@ -15,6 +15,7 @@
 
 # production
 /build
+/scribing
 
 # misc
 .DS_Store

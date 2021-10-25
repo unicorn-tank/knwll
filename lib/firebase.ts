@@ -3,6 +3,8 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
+// apiKey: process.env.REACT_APP_API_FIREBASE_KEY,
+
 const firebaseConfig = {
     apiKey: "AIzaSyD0ol07LiGiTwkq2w1L4bSUCbsTVazTw4I",
     authDomain: "quizo-cc.firebaseapp.com",
