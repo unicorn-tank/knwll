@@ -1,7 +1,5 @@
-import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
-import styles from '../styles/Home.module.css'
-import { firestore, fromMillis, postToJSON } from '../lib/firebase';
+import { firestore, fromMillis } from '../lib/firebase';
 import Metatags from '../components/Metatags';
 
 import Loader from '../components/Loader';
@@ -9,15 +7,13 @@ import QuestionFeed from '../components/QuestionFeed';
 
 const LIMIT = 10;
 
-export function postToJSON2(doc) {
+export function _postToJSON(doc) {
   const data = doc.data();
 
   return {
       ...data,
-      createdAt: data?.createdAt.seconds * 1000 + data?.createdAt.nanoseconds / 1000000 || 0,    
-      updatedAt: data?.updatedAt._seconds * 1000 + data?.updatedAt.nanoseconds / 1000000 || 0
-
-  
+      createdAt: data?.createdAt.seconds * 10000 + data?.createdAt.nanoseconds / 10000000 || 0,    
+      updatedAt: data?.updatedAt._seconds * 10000 + data?.updatedAt.nanoseconds / 10000000 || 0
   }
 }
 
@@ -27,7 +23,7 @@ export async function getServerSideProps(context) {
         .orderBy('createdAt', 'desc')
         .limit(LIMIT);
 
-  const questions = (await questionsQuery.get()).docs.map(doc => postToJSON2(doc)); 
+  const questions = (await questionsQuery.get()).docs.map(doc => _postToJSON(doc)); 
 
   return {
     props: { questions }, // will be passed to the page component as props
@@ -42,6 +38,7 @@ export default function Home(props) {
   const [questionsEnd, setQuestionsEnd] = useState(false);
 
   const getMoreQuestions = async() => {
+
     setLoading(true);
     
     const last = questions[questions.length - 1];
@@ -54,10 +51,7 @@ export default function Home(props) {
         .startAfter(cursor)
         .limit(LIMIT);
 
-    const newQuestions = (await query.get()).docs.map(doc => postToJSON2(doc));
-
-    console.log('questions:', questions);
-    console.log('newQuestions:', newQuestions);
+    const newQuestions = (await query.get()).docs.map(doc => _postToJSON(doc));
 
     setQuestions(questions.concat(newQuestions));
     setLoading(false);

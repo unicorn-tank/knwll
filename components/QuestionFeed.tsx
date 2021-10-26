@@ -1,12 +1,12 @@
 import Link from "next/link";
 
 export default function QuestionFeed({ questions, admin }) {
-    return questions ? questions.map((question) => 
-        <QuestionItem question={question} admin={admin} key={question.slug} />
+    return questions ? questions.map((question, i) => 
+        <QuestionItem i={i} question={question} admin={admin} key={question.slug} />
     ) : <>Wait...</>;
 }
 
-function QuestionItem({ question, admin }) {
+function QuestionItem({ i, question, admin }) {
 
     //const wordCount = post?.question;
 
@@ -28,7 +28,8 @@ function QuestionItem({ question, admin }) {
             </Link>
 
             <footer>
-                <span>💛 {question.heartCount}</span>
+                <span className="heart">💛 {question.heartCount}</span>
+                <span className="index">{i + 1}</span>
             </footer>
 
         </div>

@@ -37,11 +37,10 @@ export async function getUserWithUsername(username) {
 
 export function postToJSON(doc) {
     const data = doc.data();
-  console.log('doc.data()',doc.data().reatedAt);
     return {
         ...data,
-        createdAt: (data?.createdAt.time._seconds +  data?.createdAt.time._nanoseconds*10**-9)*1000 || 0,
-        updatedAt: (data?.updatedAt.time._seconds +  data?.updatedAt.time._nanoseconds*10**-9)*1000 || 0
+        createdAt: data?.createdAt.seconds * 10000 + data?.createdAt.nanoseconds / 10000000 || 0,
+        updatedAt: data?.updatedAt._seconds * 10000 + data?.updatedAt.nanoseconds / 10000000 || 0
         //createdAt: data?.createdAt.toMills() || 0,
         //updatedAt: data?.updatedAt.toMills() || 0
 
