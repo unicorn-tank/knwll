@@ -9,14 +9,25 @@ import QuestionFeed from '../components/QuestionFeed';
 
 const LIMIT = 10;
 
+export function postToJSON2(doc) {
+  const data = doc.data();
+
+  return {
+      ...data,
+      createdAt: data?.createdAt.seconds * 1000 + data?.createdAt.nanoseconds / 1000000 || 0,    
+      updatedAt: data?.updatedAt._seconds * 1000 + data?.updatedAt.nanoseconds / 1000000 || 0
+
+  
+  }
+}
+
 export async function getServerSideProps(context) {
   const questionsQuery = firestore
         .collectionGroup('questions')
-        //.where('published', '==', false)
         .orderBy('createdAt', 'desc')
         .limit(LIMIT);
 
-  const questions = (await questionsQuery.get()).docs.map(postToJSON);
+  const questions = (await questionsQuery.get()).docs.map(doc => postToJSON2(doc)); 
 
   return {
     props: { questions }, // will be passed to the page component as props
@@ -28,7 +39,6 @@ export default function Home(props) {
   const [questions, setQuestions] = useState(props.questions);
   const [questionsCount, setQuestionsCount] = useState(0);
   const [loading, setLoading] = useState(false);
-
   const [questionsEnd, setQuestionsEnd] = useState(false);
 
   const getMoreQuestions = async() => {
@@ -36,16 +46,18 @@ export default function Home(props) {
     
     const last = questions[questions.length - 1];
 
-    const cursor = typeof last.createdAt === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+    const cursor = typeof(last.createdAt) === 'number' ? fromMillis(last.createdAt) : last.createdAt;
 
     const query = firestore 
         .collectionGroup('questions')
-        .where('published', '==', false)
         .orderBy('createdAt', 'desc')
         .startAfter(cursor)
         .limit(LIMIT);
 
-    const newQuestions = (await query.get()).docs.map((doc) => doc.data());
+    const newQuestions = (await query.get()).docs.map(doc => postToJSON2(doc));
+
+    console.log('questions:', questions);
+    console.log('newQuestions:', newQuestions);
 
     setQuestions(questions.concat(newQuestions));
     setLoading(false);
@@ -64,9 +76,8 @@ export default function Home(props) {
 
   useEffect(() => {
     fetchQuestionsCount(); 
-  }, []);
+  });
  
-
   return (
     <main>
       <Metatags title="KNWL: Know All | Questions & Answers | Smart Query, Quiz Request" description="Ask, query or inquire Questions & Answers pair like quiz request." />
