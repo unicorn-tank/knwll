@@ -43,7 +43,7 @@ export default function Home(props) {
     
     const last = questions[questions.length - 1];
 
-    const cursor = typeof(last.createdAt) === 'number' ? fromMillis(last.createdAt) : last.createdAt;
+    const cursor = typeof last.createdAt == 'number' ? fromMillis(last.createdAt) : last.createdAt;
 
     const query = firestore 
         .collectionGroup('questions')
@@ -74,7 +74,7 @@ export default function Home(props) {
  
   return (
     <main>
-      <Metatags title="KNWL: Know All | Questions & Answers | Smart Query, Quiz Request" description="Ask, query or inquire Questions & Answers pair like quiz request." />
+      <Metatags title="KNWL: Know All | Questions & Answers | Smart Query, Quiz Request" description="Ask questions, check answers." />
 
       <div className="card card-head">
         <div className="card-title">
