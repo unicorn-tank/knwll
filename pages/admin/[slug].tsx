@@ -35,7 +35,7 @@ function QuestionManager() {
                         <h1>{question.question}</h1>
                         <p>ID: {question.slug}</p>
 
-                        <QuestionForm questionRef={questionRef} defaultValues={question} preview={preview} />
+                        <AnswerForm questionRef={questionRef} defaultValues={question} preview={preview} />
                     </section>
                 </>
             )}
@@ -43,7 +43,7 @@ function QuestionManager() {
     );
 }
 
-function QuestionForm({ questionRef, defaultValues, preview }) {
+function AnswerForm({ questionRef, defaultValues, preview }) {
     const { register, handleSubmit, reset, watch, formState, formState: {errors} } = useForm({ defaultValues, mode: 'onChange'});
     const { isValid, isDirty } = formState;
     const router = useRouter();
@@ -73,7 +73,7 @@ function QuestionForm({ questionRef, defaultValues, preview }) {
             <div className={preview ? styles.hidden : styles.control }>
 
                 <input name="answer" {...register("answer",
-                               {required: true,
+                               { required: true,
                                 maxLength: 150,
                                 minLength: 3}
 

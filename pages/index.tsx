@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+
 import { firestore, fromMillis } from '../lib/firebase';
 import Metatags from '../components/Metatags';
-
 import Loader from '../components/Loader';
 import QuestionFeed from '../components/QuestionFeed';
 
@@ -43,7 +43,7 @@ export default function Home(props) {
     
     const last = questions[questions.length - 1];
 
-    const cursor = typeof last.createdAt == 'number' ? fromMillis(last.createdAt) : last.createdAt;
+    const cursor = typeof last?.createdAt == 'number' ? fromMillis(last.createdAt) : last.createdAt;
 
     const query = firestore 
         .collectionGroup('questions')
