@@ -1,14 +1,37 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { connectStateResults } from 'react-instantsearch-dom'
 
-export default function QuestionFeed({ questions, admin }) {
-    return questions ? questions.map((question, i) => 
-        <QuestionItem i={i} question={question} admin={admin} key={question.slug} />
-    ) : <>Wait...</>;
+const QuestionFeed = ({ admin, searchState, searchResults }) => {
+
+    const validQuery = searchState.query?.lenght >= 3;
+    console.log('searchResults?.hits.length:',searchResults?.hits.length)
+    //return questions ? questions.map((question, i) => 
+    //            {/* <QuestionItem i={i} key={hit.slug} question={hit.question} admin={admin}  /> */}
+
+    return ( 
+        <>
+            { searchResults?.hits.length === 0 && validQuery && (
+                <p>No search results were found.</p>
+            )}
+
+            { searchResults?.hits.length > 0 && 
+            
+                
+                searchResults.hits.map((question, i) => (
+                    <QuestionItem i={i} key={question.slug} question={question} admin={admin} />
+        
+                )) 
+
+    
+            }
+                
+
+
+        </>
+    );
 }
 
 function QuestionItem({ i, question, admin }) {
-
-    //const wordCount = post?.question;
 
     return (
         <div className="card">
@@ -29,9 +52,11 @@ function QuestionItem({ i, question, admin }) {
 
             <footer>
                 <span className="heart">💛 {question.heartCount}</span>
-                <span className="index">{i + 1}</span>
+                <span className="index">#{i + 1}</span>
             </footer>
 
         </div>
     )
 }
+
+export default connectStateResults(QuestionFeed);
