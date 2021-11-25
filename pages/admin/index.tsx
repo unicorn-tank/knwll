@@ -4,7 +4,6 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
 import QuestionFeed from '../../components/QuestionFeed';
 
-
 //import QuestionsList from './questions/questionslist';
 import CreateNewQuestion from './questions/createnewquestion';
 
@@ -17,7 +16,7 @@ export default function AdminPostsPage(props) {
             <AuthCheck>
                 <CreateNewQuestion />
                 <br />
-                <QuestionsList />
+                {/*<QuestionsList />*/}
             </AuthCheck>
         </main>
     )
@@ -34,7 +33,8 @@ function QuestionsList() {
     return (
         <>
             <h1>Manage Questions</h1>
-            <QuestionFeed questions={questions} admin />
+                {/* <QuestionFeed questions={questions} admin={false} /> */}
+                <QuestionFeed admin={false} />
         </>
     )
 }

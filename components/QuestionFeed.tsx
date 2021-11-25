@@ -4,7 +4,7 @@ import { connectStateResults } from 'react-instantsearch-dom'
 const QuestionFeed = ({ admin, searchState, searchResults }) => {
 
     const validQuery = searchState.query?.lenght >= 3;
-    console.log('searchResults?.hits.length:',searchResults?.hits.length)
+
     //return questions ? questions.map((question, i) => 
     //            {/* <QuestionItem i={i} key={hit.slug} question={hit.question} admin={admin}  /> */}
 

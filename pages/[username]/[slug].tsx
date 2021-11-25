@@ -3,7 +3,7 @@ import styles from '../../styles/Question.module.css';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
-import PostQuestions from '../../components/QuestionFeed';
+//import PostQuestions from '../../components/QuestionFeed';
 import PostAnswer from '../../components/PostAnswer';
 import AuthCheck from '../../components/AuthCheck';
 import HeartButton from '../../components/HeartButton';
