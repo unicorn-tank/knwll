@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 import UserProfile from '../../components/UserProfile';
 import QuestionsUserFeed from '../../components/QuestionsUserFeed';
@@ -13,9 +14,9 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 export default function UserProfilePage(props) {
 
-    
+
     // console.log('USER:', user);
-    
+
     // console.log('QUESTIONS:', questions);
     let { user } = props;
     let questions = {};
@@ -41,20 +42,25 @@ export default function UserProfilePage(props) {
             const [querySnapshot] = useCollection(query);
             questions = querySnapshot?.docs.map((doc) => doc.data());
         }
-  
- 
+
+
     }
 
     return (
         <>
+            <Head>
+                <title>Questions and answers user profile, knwll: know well, like qizzo</title>
+                <meta name="description" content="Question & Answer user profile page of KNWLL, know well, like quizzo." />
+            </Head>
+            
             {user &&
-                    <>
+                <>
                     <UserProfile user={user} />
                     <QuestionsUserFeed questions={questions} admin={false} />
-                    </>
-                    
+                </>
+
             }
-    
+
         </>
     )
 }

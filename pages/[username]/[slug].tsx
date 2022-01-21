@@ -1,6 +1,6 @@
 import Link from 'next/link';
+import Head from 'next/head';
 //import styles from '../../styles/Question.module.css';
-import Helmet from 'react-helmet';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
@@ -57,10 +57,11 @@ export default function PostQuestion(props) {
 
     return (
         <>
-            <Helmet>
+            <Head>
                 <title>Question & Answer, knwll: know well</title>
-                <meta name="description" content="Question & Answer page of KNWLL, know well." />
-            </Helmet>
+                <meta name="description" content="Question & Answer page of KNWLL, know well, like quizzo." />
+            </Head>
+
             <Box isBorder={true}>
 
                 <ShowAnswerQuestion question={question} questionRef={questionRef} />

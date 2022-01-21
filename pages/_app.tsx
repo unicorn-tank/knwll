@@ -26,16 +26,15 @@ function KNWLLApp({ Component, pageProps }) {
 
   useEffect(() => {
     TagManager.initialize(tagManagerArgs);
-  },[])
+  }, [])
 
   return (
     <JssProvider registry={sheets}>
       <UserContext.Provider value={userData}>
-        
 
-          <Navbar />
-          <Component {...pageProps} />
-   
+        <Navbar />
+        <Component {...pageProps} />
+
 
         <Toaster />
       </UserContext.Provider>

@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import AuthCheck from '../../components/AuthCheck';
 
 
@@ -7,12 +9,15 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import QuestionFeed from '../../components/QuestionFeed';
 import CreateNewQuestion from './questions/createnewquestion';
 
-import Metatags from '../../components/Metatags';
-
 export default function AdminPostsPage(props) {
     return (
         <main>
-            <Metatags title="KNWLL: Admin Page | Know All" />
+
+             <Head>
+                <title>New Question & Answer pair creating...</title>
+                <meta name="description" content="Create new question answer pair. Knwll: know well, like qizzo" />
+            </Head>
+
             <AuthCheck>
                 <CreateNewQuestion />
             </AuthCheck>

@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { withRouter } from "next/router";
-
-import Helmet from 'react-helmet';
+import Metatags from '../components/MainMetaTags';
 
 import { firestore, fromMillis } from '../lib/firebase';
 import qs from 'qs';
 
-import Metatags from '../components/Metatags';
 import Loader from '../components/Loader';
 import QuestionFeed from '../components/QuestionFeed';
 
@@ -54,16 +52,7 @@ const Home = (props) => {
 
     <main>
 
-      <Helmet>
-        <html lang="en" />
-        <meta property="description" content="Ask questions, check the answer. Questions and answers repositorium will feed your any quiz request." />
-        
-        {/* <link rel="apple-touch-icon" href="http://knwll.com/iapple-touch-icon-57x57.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="http://knwll.com/apple-touch-icon-72x72.png" />
-    */}
-      </Helmet>
-
-      <Metatags title="KNWL: Know All | Questions & Answers | Quiz" description="Ask question, find answer." />
+      <Metatags title="KNWL: Know All | Questions & Answers | Quiz" description="Ask question, find answer, like qizzo." />
 
       <Cluster justifyContent='space-between' isBorder={false}>
         <h2>Search</h2>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import { firestore, auth, serverTimestamp } from '../../lib/firebase';
@@ -25,12 +26,16 @@ function QuestionManager() {
     const { slug } = router.query;
 
     const questionRef = firestore.collection('users').doc(auth.currentUser.uid).collection('questions').doc(slug.toString());
-    const [ question ] = useDocumentData(questionRef);
+    const [question] = useDocumentData(questionRef);
 
     return (
         <main>
             {question && (
                 <>
+                    <Head>
+                        <title>Questions and answers user administrative profile, knwll: know well, like qizzo</title>
+                        <meta name="description" content="Question & Answer user administrative profile page of KNWLL, know well, like quizzo." />
+                    </Head>
                     <section>
                         <h1>{question.question}</h1>
                         <p>ID: {question.slug}</p>
@@ -44,7 +49,7 @@ function QuestionManager() {
 }
 
 function AnswerForm({ questionRef, defaultValues, preview }) {
-    const { register, handleSubmit, reset, watch, formState, formState: {errors} } = useForm({ defaultValues, mode: 'onChange'});
+    const { register, handleSubmit, reset, watch, formState, formState: { errors } } = useForm({ defaultValues, mode: 'onChange' });
     const { isValid, isDirty } = formState;
     const router = useRouter();
 
@@ -73,12 +78,14 @@ function AnswerForm({ questionRef, defaultValues, preview }) {
             <div>
 
                 <input name="answer" {...register("answer",
-                               { required: true,
-                                maxLength: 150,
-                                minLength: 3}
+                    {
+                        required: true,
+                        maxLength: 150,
+                        minLength: 3
+                    }
 
-                        )}></input>
- 
+                )}></input>
+
                 {errors.answer?.type === 'required' && "Answer is required"}
                 {errors.answer?.type === 'maxLength' && "Answer is too long"}
                 {errors.answer?.type === 'minLength' && "Answer is too short"}
