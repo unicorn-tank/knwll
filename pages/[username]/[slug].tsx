@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import styles from '../../styles/Question.module.css';
+//import styles from '../../styles/Question.module.css';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
 //import PostQuestions from '../../components/QuestionFeed';
-import PostAnswer from '../../components/PostAnswer';
-import AuthCheck from '../../components/AuthCheck';
-import HeartButton from '../../components/HeartButton';
+import PostAnswerQuestion from '../../components/PostAnswerQuestion';
+
+import Box from '../../layout/Box';
+import Cluster from '../../layout/Cluster';
 
 export async function getStaticProps({ params }) {
     const { username, slug } = params;
@@ -38,7 +39,7 @@ export async function getStaticPaths() {
         return {
             params: { username, slug }
         }
-    })
+})
 
     return {
         paths,
@@ -54,27 +55,10 @@ export default function PostQuestion(props) {
     const question = realtimeQuestion || props.question;
 
     return (
-        <main className={styles.container}>
+        <Box isBorder={true}>
 
-            <section>
-                <PostAnswer question={question} />
-            </section>
+            <PostAnswerQuestion question={question} questionRef={questionRef} />
 
-            <aside className="card">
-                <p><strong>💛 {question.heartCount || 0}</strong></p>
-
-                <AuthCheck fallback={
-                        <Link href="/enter">
-                            <button>🧡 Sign Up</button>
-                        </Link>
-                    }>
-                    <HeartButton questionRef={questionRef} />
-                </AuthCheck>
-
-            </aside>
-
-
-
-        </main>
+        </Box>
     )
 }

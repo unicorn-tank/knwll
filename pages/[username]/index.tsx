@@ -1,46 +1,60 @@
-import UserProfile from '../../components/UserProfile';
-import QuestionFeed from '../../components/QuestionFeed';
+import { useRouter } from 'next/router';
 
+import UserProfile from '../../components/UserProfile';
+import QuestionsUserFeed from '../../components/QuestionsUserFeed';
+
+import { firestore, auth } from '../../lib/firebase';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { getUserWithUsername } from '../../lib/firebase';
 import { postToJSON } from '../../lib/firebase';
 
-export async function getServerSideProps({ query }) {
+import { useDocumentData } from 'react-firebase-hooks/firestore';
+
+
+export default function UserProfilePage(props) {
+
     
-    const { username } = query;
+    // console.log('USER:', user);
+    
+    // console.log('QUESTIONS:', questions);
+    let { user } = props;
+    let questions = {};
 
-    const userDoc = await getUserWithUsername(username);
+    if (auth.currentUser) {
+        user = auth.currentUser;
+        const uid = user.uid;
+        const ref = firestore.collection('users').doc(uid).collection('questions')
+        const query = ref.orderBy('createdAt');
+        const [querySnapshot] = useCollection(query);
+        questions = querySnapshot?.docs.map((doc) => doc.data());
+    } else {
+        //const router = useRouter();
+        //const { user } = router.query;
 
-    if (!userDoc) {
-        return {
-            notFound: true,
+
+        //user = getUserWithUsername(user);
+        //const userDoc = getUserWithUsername(user);
+
+        if (user) {
+            const ref = firestore.collection('users').doc(user).collection('questions')
+            const query = ref.orderBy('createdAt');
+            const [querySnapshot] = useCollection(query);
+            questions = querySnapshot?.docs.map((doc) => doc.data());
         }
+  
+ 
     }
 
-    let user = null;
-    let questions = null;
-
-    if (userDoc) {
-        user = userDoc.data();
-        const postQuery = userDoc.ref
-            .collection('questions')
-            .where('published', '==', true)
-            .orderBy('createdAt', 'desc');
-
-        questions = (await postQuery.get()).docs.map(postToJSON);
-    }
-
-    
-
-    return {
-        props: { user, questions }
-    }
-}
-
-export default function UserProfilePage({ user, questions }) {
     return (
-        <main>
-            <UserProfile user={user} />
-            <QuestionFeed questions={questions} admin={false} />
-        </main>
+        <>
+            {user &&
+                    <>
+                    <UserProfile user={user} />
+                    <QuestionsUserFeed questions={questions} admin={false} />
+                    </>
+                    
+            }
+    
+        </>
     )
 }

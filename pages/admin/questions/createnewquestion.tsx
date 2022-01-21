@@ -6,7 +6,7 @@ import { firestore, auth, serverTimestamp } from '../../../lib/firebase';
 import kebabCase from 'lodash.kebabcase';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../../lib/context';
-import styles from '../../../styles/Admin.module.css';
+//import styles from '../../../styles/Admin.module.css';
 
 const questionsGroupQuery = firestore.collectionGroup('questions');
 
@@ -98,8 +98,7 @@ function QuestionForm({ username, router }) {
                     }
 
             )}
-                placeholder="Add New Question!"
-                className={styles.input}
+                placeholder="Type new question here..."
                 disabled={formState.isSubmitting}
                 ></input>
 

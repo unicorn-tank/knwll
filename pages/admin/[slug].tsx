@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import AuthCheck from '../../components/AuthCheck';
 
-import styles from '../../styles/Admin.module.css';
+//import styles from '../../styles/Admin.module.css';
 import toast from 'react-hot-toast';
 
 export default function AdminPostEdit(props) {
@@ -28,7 +28,7 @@ function QuestionManager() {
     const [ question ] = useDocumentData(questionRef);
 
     return (
-        <main className={styles.container}>
+        <main>
             {question && (
                 <>
                     <section>
@@ -70,7 +70,7 @@ function AnswerForm({ questionRef, defaultValues, preview }) {
                 </div>
             )}
 
-            <div className={preview ? styles.hidden : styles.control }>
+            <div>
 
                 <input name="answer" {...register("answer",
                                { required: true,
@@ -84,7 +84,7 @@ function AnswerForm({ questionRef, defaultValues, preview }) {
                 {errors.answer?.type === 'minLength' && "Answer is too short"}
 
                 <fieldset>
-                    <input className={styles.checkbox} name="published" type="checkbox" {...register("published")}></input>
+                    <input name="published" type="checkbox" {...register("published")}></input>
                     <label>Published</label>
                 </fieldset>
 

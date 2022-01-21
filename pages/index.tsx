@@ -7,19 +7,26 @@ import qs from 'qs';
 import Metatags from '../components/Metatags';
 import Loader from '../components/Loader';
 import QuestionFeed from '../components/QuestionFeed';
-import Search from '../components/search/Search';
+
 import { findResultsState } from 'react-instantsearch-dom/server';
-export { createURL, searchStateToURL, pathToSearchState  } from "../components/search";
+//import algoliasearch from 'algoliasearch/lite';
+import { InstantSearch, Configure } from 'react-instantsearch-dom';
+import Search from '../components/Search/Search';
+import Cluster from '../layout/Cluster';
 
-import algoliasearch from 'algoliasearch/lite';
-import { InstantSearch, SearchBox, Configure, Hits } from 'react-instantsearch-dom';
+// import { Center } from '@bedrock-layout/center';
+// <Center>
+// </Center>
+//import { Well, Title } from '@zendeskgarden/react-notifications';
 
-const searchClient = algoliasearch(process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY);
+//export { createURL, searchStateToURL, pathToSearchState  } from "../components/search";
 
-const updateAfter = 30;
+// const searchClient = algoliasearch(process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+//   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY);
 
-const LIMIT = 100;
+// const updateAfter = 15;
+
+// const LIMIT = 1000;
 // export function _postToJSON(doc) {
 //   const data = doc.data();
 
@@ -42,13 +49,13 @@ const LIMIT = 100;
 //   }
 // }
 
-const createURL = state => `?${qs.stringify(state)}`;
+// const createURL = state => `?${qs.stringify(state)}`;
 
-const searchStateToURL = (location, searchState) =>
-  searchState ? `${location.pathname}?${qs.stringify(searchState)}` : "";
+// const searchStateToURL = (location, searchState) =>
+//   searchState ? `${location.pathname}?${qs.stringify(searchState)}` : "";
 
 const pathToSearchState = path =>
-  path.includes("?") ? qs.parse(path.substring(path.indexOf("?") + 1)) : {};
+   path.includes("?") ? qs.parse(path.substring(path.indexOf("?") + 1)) : {};
 
 
 export async function getInitialProps(context) {
@@ -82,61 +89,64 @@ export async function getInitialProps(context) {
 // }
 
 
-
-
  const Home = (props) => {
 
-  const [questions, setQuestions] = useState(props.questions);
-  const [questionsCount, setQuestionsCount] = useState(0);
-  const [loading, setLoading] = useState(false);
   const [questionsEnd, setQuestionsEnd] = useState(false);
-
-  const { router, page, seoProps, ...restProps } = props;
-
-  const setStateId = useRef(null);
-
-  const [searchState, setSearchState] = useState(
-    pathToSearchState(router.asPath)
-  );
-
-  const onSearchStateChange = nextSearchState => {
-    clearTimeout(10);
-
-    setStateId.current = setTimeout(() => {
-      const href = searchStateToURL(router, nextSearchState);
-
-      props.router.push(href, href, {
-        shallow: true
-      });
-
-      setSearchState(nextSearchState);
-    }, updateAfter);
-  };
+  
+  const [questionsCount, setQuestionsCount] = useState(0);
+  
+  // const [questions, setQuestions] = useState(props.questions);
+ 
+  // const [loading, setLoading] = useState(false);
 
 
-  const getMoreQuestions = async () => {
+  // const { router, page, seoProps, ...restProps } = props;
 
-    setLoading(true);
+  // const setStateId = useRef(null);
 
-    const last = questions[questions.length - 1];
+  // const [searchState, setSearchState] = useState(
+  //   pathToSearchState(router.asPath)
+  // );
 
-    const cursor = typeof last?.createdAt == 'number' ? fromMillis(last.createdAt) : last.createdAt;
+  // const onSearchStateChange = nextSearchState => {
+  //   clearTimeout(10);
 
-    const query = firestore
-      .collectionGroup('questions')
-      .orderBy('createdAt', 'desc')
-      .startAfter(cursor)
-      .limit(LIMIT);
+  //   setStateId.current = setTimeout(() => {
+  //     const href = searchStateToURL(router, nextSearchState);
 
-    const newQuestions = (await query.get()).docs.map(doc => _postToJSON(doc));
+  //     props.router.push(href, href, {
+  //       shallow: true
+  //     });
 
-    setQuestions(questions.concat(newQuestions));
-    setLoading(false);
+  //     setSearchState(nextSearchState);
 
-    if (newQuestions.length < LIMIT) {
-      setQuestionsEnd(true);
-    }
-  }
+  //   }, updateAfter);
+  // };
+
+
+  // const getMoreQuestions = async () => {
+
+  //   setLoading(true);
+
+  //   const last = questions[questions.length - 1];
+
+  //   const cursor = typeof last?.createdAt == 'number' ? fromMillis(last.createdAt) : last.createdAt;
+
+  //   const query = firestore
+  //     .collectionGroup('questions')
+  //     .orderBy('createdAt', 'desc')
+  //     .startAfter(cursor)
+  //     .limit(LIMIT);
+
+  //   const newQuestions = (await query.get()).docs.map(doc => _postToJSON(doc));
+
+  //   setQuestions(questions.concat(newQuestions));
+  //   setLoading(false);
+
+  //   if (newQuestions.length < LIMIT) {
+  //     setQuestionsEnd(true);
+  //   }
+  // }
 
   const fetchQuestionsCount = () => {
     const questionsGroup = firestore.collectionGroup('questions').get().then((docs) => {
@@ -150,45 +160,33 @@ export async function getInitialProps(context) {
   });
 
   return (
+    
     <main>
+
       <Metatags title="KNWL: Know All | Questions & Answers | Smart Query, Quiz Request" description="Ask questions, check answers." />
 
-      <InstantSearch 
+      {/* <InstantSearch 
         searchClient={searchClient}
         indexName="questions_answers"
         searchState={searchState}
         resultsState={restProps.resultsState}
         onSearchStateChange={onSearchStateChange}
         createURL={createURL}
-        
-        >
+      > */}
 
-        <Configure hitsPerPage={restProps.hitsPerPage || 18} />
+        <Cluster justifyContent='space-between' isBorder={false}>
+            <h2>Search</h2>
+        </Cluster>
 
-        <SearchBox 
-          showLoadingIndicator={true}
-        
-        />
+        <Search props={props} questionsCount={questionsCount}/>
+    
+      
 
-        <div className="card card-head">
-          <div className="card-title">
-            <h1>Questions & Answers</h1>
-          </div>
-          <div className="card-info">
-            <h1>Total: {questionsCount}</h1>
-          </div>
-        </div>
+      {/* {!loading && !questionsEnd && <button onClick={getMoreQuestions}>Load more</button>} */}
 
-        {/* <QuestionFeed questions={questions} admin={false} /> */}
-        <QuestionFeed admin={false} />
+      {/* <Loader show={loading} /> */}
 
-      </InstantSearch>
-
-      {!loading && !questionsEnd && <button onClick={getMoreQuestions}>Load more</button>}
-
-      <Loader show={loading} />
-
-      {questionsEnd && 'You have reached the end!'}
+      { questionsEnd && 'You have reached the end!' }
 
     </main>
   )
