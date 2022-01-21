@@ -11,7 +11,7 @@ import QuestionFeed from '../components/QuestionFeed';
 import { findResultsState } from 'react-instantsearch-dom/server';
 //import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
-import Search from '../components/Search/Search';
+import Search from '../components/search/Search';
 import Cluster from '../layout/Cluster';
 
 // import { Center } from '@bedrock-layout/center';
