@@ -3,7 +3,7 @@ import { InfiniteScroll } from 'react-infinite-scroller';
 
 import { connectInfiniteHits } from 'react-instantsearch-dom';
 import { QuestionItem } from '../QuestionItem';
-import CustomSearchBox from '../../components/Search/CustomSearchBox';
+import CustomSearchBox from './CustomSearchBox';
 //import QuestionFeed from '../QuestionFeed';
 import Stack from '../../layout/Stack';
 import Cluster from '../../layout/Cluster';
