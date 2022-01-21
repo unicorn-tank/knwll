@@ -3,7 +3,6 @@
 # dependencies
 /node_modules
 /functions/node_modules
-/OLDstyles
 # /functions
 /.pnp
 .pnp.js

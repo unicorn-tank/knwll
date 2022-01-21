@@ -1,10 +1,11 @@
 import Link from 'next/link';
 //import styles from '../../styles/Question.module.css';
+import Helmet from 'react-helmet';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
 //import PostQuestions from '../../components/QuestionFeed';
-import PostAnswerQuestion from '../../components/PostAnswerQuestion';
+import ShowAnswerQuestion from '../../components/ShowAnswerQuestion';
 
 import Box from '../../layout/Box';
 import Cluster from '../../layout/Cluster';
@@ -24,7 +25,7 @@ export async function getStaticProps({ params }) {
     }
 
     return {
-        props: { question , path },
+        props: { question, path },
         revalidate: 5000
     }
 }
@@ -39,7 +40,7 @@ export async function getStaticPaths() {
         return {
             params: { username, slug }
         }
-})
+    })
 
     return {
         paths,
@@ -55,10 +56,16 @@ export default function PostQuestion(props) {
     const question = realtimeQuestion || props.question;
 
     return (
-        <Box isBorder={true}>
+        <>
+            <Helmet>
+                <title>Question & Answer, knwll: know well</title>
+                <meta name="description" content="Question & Answer page of KNWLL, know well." />
+            </Helmet>
+            <Box isBorder={true}>
 
-            <PostAnswerQuestion question={question} questionRef={questionRef} />
+                <ShowAnswerQuestion question={question} questionRef={questionRef} />
 
-        </Box>
+            </Box>
+        </>
     )
 }

@@ -32,12 +32,10 @@ function KNWLLApp({ Component, pageProps }) {
     <JssProvider registry={sheets}>
       <UserContext.Provider value={userData}>
         
-      
 
           <Navbar />
           <Component {...pageProps} />
    
-  
 
         <Toaster />
       </UserContext.Provider>

@@ -2,7 +2,7 @@ import Head from 'next/head';
 
 export default function MetaTags({ title, description="", image =null}) {
     return (
-        <Head>
+        <>
             
             <title>{title}</title>
             <meta name="twitter:card" content="summary" />
@@ -17,6 +17,6 @@ export default function MetaTags({ title, description="", image =null}) {
 
             <meta property="description" content="Ask questions, check the answer. Questions and answers repositorium will feed your any quiz request." />
  
-</Head>
+        </>
     )
 }
