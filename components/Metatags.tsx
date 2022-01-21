@@ -15,8 +15,7 @@ export default function MetaTags({ title, description="", image =null}) {
             <meta property="og:description" content={description} />
             <meta property="og:image" content={image} />
 
-            <meta property="description" content="Ask questions, check the answer. Questions and answers repositorium will feed your any quiz request." />
- 
+       
         </>
     )
 }

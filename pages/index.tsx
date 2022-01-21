@@ -54,12 +54,16 @@ const Home = (props) => {
 
     <main>
 
-    <Helmet>
-      
+      <Helmet>
+        <html lang="en" />
+        <meta property="description" content="Ask questions, check the answer. Questions and answers repositorium will feed your any quiz request." />
+        
+        {/* <link rel="apple-touch-icon" href="http://knwll.com/iapple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="http://knwll.com/apple-touch-icon-72x72.png" />
+    */}
+      </Helmet>
+
       <Metatags title="KNWL: Know All | Questions & Answers | Quiz" description="Ask question, find answer." />
-      
-    </Helmet>
-    
 
       <Cluster justifyContent='space-between' isBorder={false}>
         <h2>Search</h2>
