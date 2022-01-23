@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import AuthCheck from '../../components/AuthCheck';
+import AuthCheck from '@components/AuthCheck';
 
 
-import { firestore, auth } from '../../lib/firebase';
+import { firestore, auth } from '@lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
-import QuestionFeed from '../../components/QuestionFeed';
+import QuestionFeed from '@components/QuestionFeed';
 import CreateNewQuestion from './questions/createnewquestion';
 
 export default function AdminPostsPage(props) {

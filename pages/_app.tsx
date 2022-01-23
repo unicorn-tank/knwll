@@ -1,16 +1,16 @@
 import TagManager from 'react-gtm-module';
 
 //import '../styles/globals2.css';
-import Navbar from '../components/Navbar';
+import Navbar from '@components/Navbar';
 import { Toaster } from 'react-hot-toast';
-import { UserContext } from '../lib/context';
+import { UserContext } from '@lib/context';
 
-import { useUserData } from '../lib/hooks';
+import { useUserData } from '@lib/hooks';
 import { useEffect } from 'react';
 
 //import useSheet from 'react-jss';
 import { JssProvider } from 'react-jss';
-import globalSetupJss from '../styles/globalSetupJss';
+import globalSetupJss from '@styles/globalSetupJss';
 
 import Stack from '../layout/Stack';
 

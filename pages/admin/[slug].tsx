@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 
-import { firestore, auth, serverTimestamp } from '../../lib/firebase';
+import { firestore, auth, serverTimestamp } from '@lib/firebase';
 import { useForm } from 'react-hook-form';
 
-import AuthCheck from '../../components/AuthCheck';
+import AuthCheck from '@components/AuthCheck';
 
 //import styles from '../../styles/Admin.module.css';
 import toast from 'react-hot-toast';

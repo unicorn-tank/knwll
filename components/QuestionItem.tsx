@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Cluster from '../layout/Cluster';
-import Box from '../layout/Box';
+import Box from '@layout/Box';
+import Cluster from '@layout/Cluster';
 
 export const QuestionItem = ({ question, admin, i }) => {
 
@@ -17,10 +17,8 @@ export const QuestionItem = ({ question, admin, i }) => {
                 
                 </Link>
 
-                <span>{question.heartCount} &#9825;</span>
+                <span>&#9825;<sup><small>{question.heartCount}</small></sup></span>
                 
-  
-           
         </Cluster>
         </Box>
     )

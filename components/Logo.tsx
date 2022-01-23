@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import logoImage from '../public/knwl-main-logo-white.png';
+import logoImage from '../public/assets/knwl-main-logo-white.png';
 import injectSheet from 'react-jss';
 import Cluster from '../layout/Cluster';
 

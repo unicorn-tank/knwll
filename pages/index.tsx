@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { withRouter } from "next/router";
-import Metatags from '../components/MainMetaTags';
+import Metatags from '@components/MainMetaTags';
 
 import { firestore, fromMillis } from '../lib/firebase';
 import qs from 'qs';
 
-import Loader from '../components/Loader';
-import QuestionFeed from '../components/QuestionFeed';
-
 import { findResultsState } from 'react-instantsearch-dom/server';
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
-import Search from '../components/search/Search';
-import Cluster from '../layout/Cluster';
+import Search from '@components/search/Search';
+import Cluster from '@layout/Cluster';
 
 const pathToSearchState = path =>
   path.includes("?") ? qs.parse(path.substring(path.indexOf("?") + 1)) : {};
@@ -52,7 +49,7 @@ const Home = (props) => {
 
     <main>
 
-      <Metatags title="KNWL: Know All | Questions & Answers | Quiz" description="Ask question, find answer, like qizzo." />
+      <Metatags title="KNWL: Know well | Questions & Answers | Quizzo" description="Ask question, find answer, like qizzo." />
 
       <Cluster justifyContent='space-between' isBorder={false}>
         <h2>Search</h2>

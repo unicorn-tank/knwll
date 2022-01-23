@@ -4,11 +4,9 @@ import Head from 'next/head';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
-//import PostQuestions from '../../components/QuestionFeed';
-import ShowAnswerQuestion from '../../components/ShowAnswerQuestion';
+import ShowAnswerQuestion from '@components/ShowAnswerQuestion';
 
-import Box from '../../layout/Box';
-import Cluster from '../../layout/Cluster';
+import Box from '@layout/Box';
 
 export async function getStaticProps({ params }) {
     const { username, slug } = params;
@@ -58,7 +56,7 @@ export default function PostQuestion(props) {
     return (
         <>
             <Head>
-                <title>Question & Answer, knwll: know well</title>
+                <title>Question & Answer, know well, knwll</title>
                 <meta name="description" content="Question & Answer page of KNWLL, know well, like quizzo." />
             </Head>
 

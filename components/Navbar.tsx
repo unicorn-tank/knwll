@@ -55,7 +55,7 @@ export default function Navbar() {
                                     <Link href={`/${username}`}>
                                         <a>
 
-                                            <img src={user?.photoURL || '/hacker.png'} height='50' width='50' />
+                                            <img src={user?.photoURL || '/assets/hacker.png'} height='50' width='50' />
 
                                         </a>
 

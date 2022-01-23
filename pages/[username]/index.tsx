@@ -1,16 +1,11 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-import UserProfile from '../../components/UserProfile';
-import QuestionsUserFeed from '../../components/QuestionsUserFeed';
+import UserProfile from '@components/UserProfile';
+import QuestionsUserFeed from '@components/QuestionsUserFeed';
 
-import { firestore, auth } from '../../lib/firebase';
+import { firestore, auth } from '@lib/firebase';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { getUserWithUsername } from '../../lib/firebase';
-import { postToJSON } from '../../lib/firebase';
-
-import { useDocumentData } from 'react-firebase-hooks/firestore';
-
 
 export default function UserProfilePage(props) {
 

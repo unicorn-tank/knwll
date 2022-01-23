@@ -46,11 +46,11 @@ function SignInButton() {
             <Cluster isBorder={false}>
 
             <button onClick={signInWithGoogle} className="login" style={{fontSize: '3rem'}}>
-                <img src={'/google.png'} width="4components/Metatags0px"/> Sign in with Google
+                <img src={'/assets/google.png'} width="4components/Metatags0px"/> Sign in with Google
             </button>
 
             <button onClick={signInAnonymously} className="login" style={{fontSize: '3rem'}} disabled>
-                <img src={'/hacker.png'} width="40px"/>
+                <img src={'/assets/hacker.png'} width="40px"/>
                 Sign in Anonymously
             </button>
 
