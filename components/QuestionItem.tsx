@@ -6,7 +6,7 @@ export const QuestionItem = ({ question, admin, i }) => {
 
     return (
 
-        <Box isBorder={false}>
+        <Box isBorder={false} isBackground={true}>
             
         <Cluster justifyContent='space-between' isBorder={false}>
          

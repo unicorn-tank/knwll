@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import algoliasearch from 'algoliasearch/lite';
 
 import { InstantSearch, Configure } from 'react-instantsearch-dom';
-import { CustomInfiniteHits } from '../../components/search/CustomInfiniteHits';
+import { CustomInfiniteHits } from '@components/search/CustomInfiniteHits';
 import qs from 'qs';
 
-import Stack from '../../layout/Stack';
+
 
 const searchClient = algoliasearch(process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
     process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY);
@@ -58,12 +58,9 @@ export default function Search({questionsCount, props}) {
                 onSearchStateChange={onSearchStateChange}
                 createURL={createURL}>
                 
-                <Configure hitsPerPage={restProps.hitsPerPage || 15} />
-
-    
+                  <Configure hitsPerPage={restProps.hitsPerPage || 15} />
                   <CustomInfiniteHits questionsCount = {questionsCount}/>
        
-
             </InstantSearch>
 
 

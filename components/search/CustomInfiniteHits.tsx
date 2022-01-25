@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { InfiniteScroll } from 'react-infinite-scroller';
+//import { customHits } from './CustomHits';
 
 import { connectInfiniteHits } from 'react-instantsearch-dom';
 import { QuestionItem } from '../QuestionItem';
@@ -14,9 +15,16 @@ const intersectionObserverOptions = {
     threshold: 0.5
 }
 
-const InfiniteHits = ({ questionsCount, hits, hasPrevious, hasMore, refinePrevious, refineNext }) => {
+
+const InfiniteHits = ( { questionsCount, hits, hasPrevious, hasMore, refinePrevious, refineNext }) => {
 
     const sentinelRef = useRef();
+    
+    //let { transformItems } = renderOptions;
+    //hits = shuffle(hits);
+
+    //const transformItems = shuffle(hits);
+    //console.log('transformItems:', hits);
 
     useEffect(() => {
 
@@ -45,14 +53,15 @@ const InfiniteHits = ({ questionsCount, hits, hasPrevious, hasMore, refinePrevio
     });
 
     return (
+        
         <Stack space="1.66em">
-
+        {hits && (<>
             <CustomSearchBox />
 
             <Stack>
                 
                 <Cluster justifyContent='space-between' isBorder={false}>
-                    <h2>Questions & Answers</h2>
+                    <h2>All Questions & Answers</h2>
                     <div>Total: {questionsCount}</div>
                 </Cluster>
 
@@ -69,10 +78,12 @@ const InfiniteHits = ({ questionsCount, hits, hasPrevious, hasMore, refinePrevio
             <div ref={sentinelRef}></div>
 
             {/* <QuestionFeed admin={false} /> */}
-
+</>)}
         </Stack>
+        
     )
-
 }
+
+
 
 export const CustomInfiniteHits = connectInfiniteHits(InfiniteHits)

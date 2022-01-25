@@ -18,7 +18,8 @@ const getStyles: BoxStyles = {
 
         padding: data.space,
         color: darkColor,
-        backgroundColor: lightColor2,
+        backgroundColor: data.isBackground ? 
+            lightColor2 : 'none',
 
         border: data.isBorder ? {
             ...globalBorderStyle

@@ -1,13 +1,15 @@
 import Link from 'next/link';
-import { auth, googleAuthProvider, firestore } from '../lib/firebase';
+import { auth, googleAuthProvider, firestore } from '@lib/firebase';
 import { useState, useContext, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-import { UserContext } from '../lib/context';
+import { UserContext } from '@lib/context';
 import { ToastBar } from 'react-hot-toast';
 import debounce from 'lodash.debounce';
 
-import Cover from '../layout/Cover';
-import Cluster from '../layout/Cluster';
+import Cover from '@layout/Cover';
+import Cluster from '@layout/Cluster';
+import Switcher from '@layout/Switcher';
+import Box from '@layout/Box';
 
 export default function EnterPage(props) {
 
@@ -16,49 +18,57 @@ export default function EnterPage(props) {
 
     useEffect(() => {
         if (username) {
-            router.push('/admin'); 
+            router.push('/admin');
         }
-        
+
     }, [username])
 
     return (
         <main>
-            { user ? (!username ? <UsernameForm /> : <></>) : <SignInButton /> }
+            {user ? (!username ? <UsernameForm /> : <></>) : <SignInButton />}
         </main>
     )
 }
 
 function SignInButton() {
 
-    const signInWithGoogle = async() => {
+    const signInWithGoogle = async () => {
         await auth.signInWithPopup(googleAuthProvider);
     }
 
-    const signInAnonymously = async() => {
+    const signInAnonymously = async () => {
         await auth.signInAnonymously();
     }
 
     return (
         <Cover centeredElement='div'>
-  
+
             <div>
-            <Cluster justifyContent='space-evenly' isBorder={false}>
-            <Cluster isBorder={false}>
+                <Cluster justifyContent='space-evenly' isBorder={false} isBackground={false}>
+                    <Cluster isBorder={false} isBackground={false}>
+                        <Switcher>
 
-            <button onClick={signInWithGoogle} className="login" style={{fontSize: '3rem'}}>
-                <img src={'/assets/google.png'} width="4components/Metatags0px"/> Sign in with Google
-            </button>
+                            <Box>
+                                <button onClick={signInWithGoogle} style={{ fontSize: '3rem' }}>
+                                    <img src={'/assets/google.png'} width="40px" /> Sign in with Google
+                                </button>
+                            </Box>
 
-            <button onClick={signInAnonymously} className="login" style={{fontSize: '3rem'}} disabled>
-                <img src={'/assets/hacker.png'} width="40px"/>
-                Sign in Anonymously
-            </button>
+                            <Box>
+                                <button onClick={signInAnonymously} style={{ fontSize: '3rem' }} disabled>
+                                    <img src={'/assets/hacker.png'} width="40px" />
+                                    Sign in Anonymously
+                                </button>
+                            </Box>
 
-            </Cluster>
-            </Cluster>
+                        </Switcher>
+                    </Cluster>
+
+
+                </Cluster>
             </div>
 
-            
+
         </Cover>
     );
 
@@ -99,16 +109,16 @@ function UsernameForm() {
 
     const checkUsername = useCallback(
         debounce(async (username) => {
-        if (username.length >= 3) {
-            const ref = firestore.doc(`usernames/${username}`);
-            const { exists } = await ref.get();
-            console.log('Firestore read executed!');
-            setIsValid(!exists);
-            setLoading(false);
+            if (username.length >= 3) {
+                const ref = firestore.doc(`usernames/${username}`);
+                const { exists } = await ref.get();
+                console.log('Firestore read executed!');
+                setIsValid(!exists);
+                setLoading(false);
 
-        }
-    }, 500), 
-    []);
+            }
+        }, 500),
+        []);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -130,11 +140,11 @@ function UsernameForm() {
             <Cluster isBorder={false}>
                 <h3>Choose Username</h3>
                 <form onSubmit={onSubmit}>
-                    
+
                     <input name="username" placeholder="username" value={formValue} onChange={onChange} />
-                    
+
                     <UsernameMessage username={formValue} isValid={isValid} loading={loading} />
-                    
+
                     <button type="submit" className="btn-green" disabled={!isValid}>
                         Choose
                     </button>
@@ -142,9 +152,9 @@ function UsernameForm() {
                     <h3>Debug State</h3>
                     <div>
                         Username: {formValue}
-                        <br/>
+                        <br />
                         Loading: {loading.toString()}
-                        <br/>
+                        <br />
                         Username Valid: {isValid.toString()}
                     </div>
                 </form>
@@ -155,7 +165,7 @@ function UsernameForm() {
 }
 
 function UsernameMessage({ username, isValid, loading }) {
-    if(loading) {
+    if (loading) {
         return <p>Checking ...</p>;
     } else if (isValid) {
         return <p className="text-success">{username} is available!</p>

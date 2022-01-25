@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firestore, getUserWithUsername, postToJSON } from '../../lib/firebase';
 
+import Metatags from '@components/MetaTags';
 import ShowAnswerQuestion from '@components/ShowAnswerQuestion';
 
 import Box from '@layout/Box';
@@ -52,15 +53,14 @@ export default function PostQuestion(props) {
     const [realtimeQuestion] = useDocumentData(questionRef);
 
     const question = realtimeQuestion || props.question;
+    const metaDescriptionContent = `One question, one answer: ${question.question}: ${question.answer}`;
 
     return (
         <>
-            <Head>
-                <title>Question & Answer, know well, knwll</title>
-                <meta name="description" content="Question & Answer page of KNWLL, know well, like quizzo." />
-            </Head>
 
-            <Box isBorder={true}>
+            <Metatags title="Know All, Know Well: Ask Question, Find Answer | Quizzo Wizard" description={metaDescriptionContent} />
+
+            <Box isBorder={true} isBackground={true}>
 
                 <ShowAnswerQuestion question={question} questionRef={questionRef} />
 

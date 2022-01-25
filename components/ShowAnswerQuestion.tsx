@@ -1,10 +1,12 @@
 import Link from 'next/link';
-import { postToJSON } from '../lib/firebase';
+import { postToJSON } from '@lib/firebase';
 import AuthCheck from './AuthCheck';
 import HeartButton from './HeartButton';
 import PostQuestionPage from '../pages/[username]/[slug]';
-import Stack from '../layout/Stack';
-import Cluster from '../layout/Cluster';
+
+import Stack from '@layout/Stack';
+import Cluster from '@layout/Cluster';
+import Switcher from '@layout/Switcher';
 
 export default function ShowAnswerQuestion({ question, questionRef }) {
     const createdAt = typeof question?.createdAt === 'number' ? new Date(question.createdAt) : question.createdAt.toDate();
@@ -30,11 +32,13 @@ export default function ShowAnswerQuestion({ question, questionRef }) {
             </Cluster>
 
             <Cluster justifyContent='flex-end' isBorder={false}>
-                Placed here by{' '}
-                <Link href={`/${question.username}/`}>
-                    <a>@{question.username}</a>
-                </Link>
-                <div>on {createdAt.toLocaleString()}</div>
+                <Switcher>
+                    Placed here by{' '}
+                    <Link href={`/${question.username}/`}>
+                        <a>@{question.username}</a>
+                    </Link>
+                    <div>on {createdAt.toLocaleString()}</div>
+                </Switcher>
             </Cluster>
   
 

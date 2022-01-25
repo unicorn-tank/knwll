@@ -36,7 +36,7 @@ const Logo = injectSheet(styles)(({ classes }) => (
         <Image className={classes.logo} src={logoImage} width={65} height={65} />
     </Link>  
     <Link href="/">
-        <span className={classes.logoText}>#KnowWell</span>
+        <span className={classes.logoText}>[ Ask Question, Find Answer ] #KnowAll #KnowWell </span>
     </Link>
 </Cluster>
     

@@ -2,7 +2,7 @@ import { connectSearchBox } from 'react-instantsearch-dom';
 
 //import { ReactComponent as StartIcon } from '@zendeskgarden/svg-icons/src/16/search-stroke.svg';
 
-const CustomSeacthBox = ({ refine }) => (
+const CustomSeacrhBox = ({ refine }) => (
 
     <input                
         id="algolia_search" 
@@ -13,4 +13,4 @@ const CustomSeacthBox = ({ refine }) => (
  
 )
 
-export default connectSearchBox(CustomSeacthBox);
+export default connectSearchBox(CustomSeacrhBox);
