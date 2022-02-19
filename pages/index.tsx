@@ -11,6 +11,7 @@ import Search from '@components/search/Search';
 import { QuestionItem } from '@components/QuestionItem';
 import Cluster from '@layout/Cluster';
 import Stack from '@layout/Stack';
+import Sidebar from '@layout/Sidebar';
 
 const pathToSearchState = path =>
   path.includes("?") ? qs.parse(path.substring(path.indexOf("?") + 1)) : {};
@@ -48,51 +49,59 @@ const Home = (props) => {
       .orderBy('createdAt', 'desc').limit(limitNumber).get().then((querySnapshot) => {
         const data = querySnapshot?.docs.map((doc) => doc.data());
         setLastQuestions(data);
-    }
-    )
+      }
+      )
   }
 
   useEffect(() => {
     fetchQuestionsCount();
-    fetchLastQuestions(2);
+    fetchLastQuestions(5);
   });
 
   return (
 
-    <main>
+    <>
 
       <Metatags title="KNWLL: Know Well, Know All | Questions & Answers | Quizzo" description="Ask question, find answer, be qizzo wizzard and know well, know all. KNWLL project" />
 
+      <Sidebar space="1rem">
+      <Stack>
+
+        <Cluster justifyContent='space-between' isBorder={false}>
+          <h2>Search</h2>
+        </Cluster>
+
+        <Search props={props} questionsCount={questionsCount} />
+
+        {/* {!loading && !questionsEnd && <button onClick={getMoreQuestions}>Load more</button>} */}
+
+        {/* <Loader show={loading} /> */}
+
+        {questionsEnd && 'You have reached the end!'}
+      </Stack>
+
+
+
         <Stack>
-                
-                <Cluster justifyContent='space-between' isBorder={false}>
-                    <h2>Recent Questions & Answers</h2>
-                </Cluster>
 
-                {
-                    lastQuestions.map((question, i) => (
+          <Cluster justifyContent='space-between' isBorder={false}>
+            <h2>Recent Questions & Answers</h2>
+          </Cluster>
 
-                        <QuestionItem key={i} i={i} question={question} admin={false} />
+          {
+            lastQuestions.map((question, i) => (
+
+              <QuestionItem key={i} i={i} question={question} admin={false} />
 
 
-                    ))
-                }
-            
+            ))
+          }
+
         </Stack>
 
-      <Cluster justifyContent='space-between' isBorder={false}>
-        <h2>Search</h2>
-      </Cluster>
+      </Sidebar>
 
-      <Search props={props} questionsCount={questionsCount} />
-
-      {/* {!loading && !questionsEnd && <button onClick={getMoreQuestions}>Load more</button>} */}
-
-      {/* <Loader show={loading} /> */}
-
-      {questionsEnd && 'You have reached the end!'}
-
-    </main>
+    </>
   )
 }
 
