@@ -10,7 +10,7 @@ export const QuestionItem = ({ question, admin, i }) => {
             
         <Cluster justifyContent='space-between' isBorder={false}>
          
-        <span>#{i}</span>
+        <span>#{i+1}</span>
                 <Link href={`/${question.username}/${question.slug}`}>
                  
                         <h3><a>{question.question}</a></h3>

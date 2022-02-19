@@ -62,7 +62,7 @@ const InfiniteHits = ( { questionsCount, hits, hasPrevious, hasMore, refinePrevi
                 
                 <Cluster justifyContent='space-between' isBorder={false}>
                     <h2>All Questions & Answers</h2>
-                    <div>Total: {questionsCount}</div>
+                    <div>Total Q&A: {questionsCount}</div>
                 </Cluster>
 
                 {

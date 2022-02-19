@@ -85,7 +85,7 @@ const Home = (props) => {
         <Stack>
 
           <Cluster justifyContent='space-between' isBorder={false}>
-            <h2>Recent Questions & Answers</h2>
+            <h2>Recent Q&A</h2>
           </Cluster>
 
           {
